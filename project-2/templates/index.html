@@ -1,0 +1,85 @@
+<html>
+<h1><a href=""><span>Visualization Assignment 2</span></a></h1>
+
+<link rel="stylesheet" type="text/css" href="static/style.css"/>
+<head>
+
+</head>
+<body data-gr-c-s-loaded="true"><div id="StayFocusd-infobar" style="display:none;">
+   
+</div>
+    <div class="ribbon">
+      <a href="#" onclick='plotScree("strat")'><span>Scree-Plot</span></a>
+      <a href="#" onclick='redraw("pca","strat")'><span>PCA</span></a>
+      <a href="#" onclick='redraw("correlation","strat" )'><span>MDS-Correlation</span></a>
+      <a href="#"" onclick='redraw("euclidean","strat")'><span>MDS-Euclidean</span></a>
+      <a href="#" onclick='scatterMatrix("strat")'><span>Scatter_Matrix</span></a>
+      <a href="#"onclick='plotElbow()'><span>Elbow</span></a>
+      <a href="#" onclick='plotLoadings("strat")'><span>Loadings/Comp</span></a>
+
+    </div>
+   
+</body>
+<body style="padding: 50px 0 0;">
+
+<div id='chart' onclick="toggle()">
+      <!-- /the chart goes here -->
+    </div>
+ <div id="screechart" onclick="screeToggle()">
+ </div>   
+ <div id='matrix' onclick="matrixToggle()">
+      <!-- /the chart goes here -->
+</div>  
+<div id="loadings" onclick="loadingsToggle()"> </div>
+    
+</body>
+     
+
+ 
+ <script>  
+ window.onload=function(){redraw("pca","strat");};
+ var fileName="pca";
+ var type="strat";
+ //var scree="strat";
+ function toggle()
+  {
+    if(type=="strat")
+        type="random";
+    else
+        type="strat";
+    if(fileName!="un")  
+      redraw(fileName,type);
+  }
+
+ function screeToggle(){
+      if(type=="strat")
+          type="random";
+       else
+          type="strat";
+       plotScree(type);    
+ } 
+
+ function loadingsToggle(){
+  if(type=="strat")
+          type="random";
+       else
+          type="strat";
+        plotLoadings(type);
+ }
+
+ function matrixToggle(){
+  if(type=="strat")
+          type="random";
+       else
+          type="strat";
+        scatterMatrix(type);
+ }
+  
+  </script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="static/plot.js"></script>
+    <script src="static/scree.js"></script>
+    <script src="static/elbow.js"> </script>
+    <script src="static/scatter_matrix.js"> </script>
+    <script src="static/loadings.js"> </script>
+</html>

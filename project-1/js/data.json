@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {"id": "sample1", "group": 1},
+    {"id": "sample2", "group": 1},
+    {"id": "sample3", "group": 1},
+    {"id": "sample4", "group": 1},    
+    {"id": "sample5", "group": 2},
+    {"id": "sample6", "group": 2},
+    {"id": "sample7", "group": 2},
+    {"id": "sample8", "group": 3},
+    {"id": "sample9", "group": 3},
+    {"id": "sample10", "group": 3},
+    {"id": "sample11", "group": 4},
+    {"id": "sample12", "group": 4},
+    {"id": "sample13", "group": 4}
+  ],
+  "links": [
+    {"source": "sample1", "target": "sample2", "value": 1},
+    {"source": "sample2", "target": "sample3", "value": 1},
+    {"source": "sample3", "target": "sample4", "value": 1},
+    {"source": "sample4", "target": "sample5", "value": 2},
+    {"source": "sample5", "target": "sample6", "value": 2},
+    {"source": "sample6", "target": "sample7", "value": 2},
+    {"source": "sample7", "target": "sample8", "value": 3},
+    {"source": "sample8", "target": "sample9", "value": 3},
+    {"source": "sample9", "target": "sample10", "value": 3},
+    {"source": "sample10", "target": "sample11", "value": 3},
+    {"source": "sample11", "target": "sample12", "value": 4},
+    {"source": "sample12", "target": "sample13", "value": 4},
+    {"source": "sample13", "target": "sample1", "value": 4},
+    {"source": "sample12", "target": "sample5", "value": 4},
+    {"source": "sample11", "target": "sample9", "value": 4}
+    
+  ]
+}

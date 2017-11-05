@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<title>D3 Assignment-1-</title>
+			<style type="text/css">
+				.hoverarea{
+					background-color: #ccffcc;
+					height: 40 px;
+					font-family: "Times New Roman";
+					font-size: 39;
+					
+				}
+			</style>
+			
+
+		</head>
+ 	<body>
+		<div style="padding : 10px">		
+		  <label id="select_label" style="font-family: sans-serif; font-size: 25px;" >Select the column to plot
+		  </label>
+		  <select id="menu" style="font-size: 25px;" onchange="report(this.value)">
+		    <option value="Height" selected>Height</option>
+		    <option value="Weight">Weight</option>
+		    <option value="Avg">Avg Runs</option>
+		  </select>
+		 
+	  	<input type="button" id="forceButton" onclick="forceGraph()" style="font-size: 25px;" value="Show Force Directed Graph" ></input>	
+		</div>
+		<div id="forceArea" style="visibility: hidden">
+		<label id="setlen" style="font-family: sans-serif; font-size: 25px; padding : 10px" >Change the length </label>
+		<input id="len" type="text" style="font-family: sans-serif; font-size: 15px; padding : 10px"></input>
+		<button id="changeLen" style="font-family: sans-serif; font-size: 25px;" onclick="changeLength()">Change Length</button>
+		</div>
+		<div>
+
+		<button class="hoverarea" id="hoverarea" style="font-size: 30px;" >Click and drag left to reduce Bin-Size and right to increase Bin-Size</button>
+		</div>
+		<div id="chart" style="margin: auto"> 
+ 		
+		
+ 	<script type='text/javascript' src="js/force_directed.js"></script>
+ 	<script type="text/javascript" src="js/shapes.js"></script>
+	<script type="text/javascript" src="d3/d3.js"></script>
+			
+	<script type="text/javascript">
+		var arr1=[];
+		var arr2=[];
+		var arr3=[];
+		
+		var bin=7, col=0;	
+		d3.csv("res/baseball_data.csv",function(data){
+			data.forEach(function (d){
+				arr1.push(parseInt(d.height));
+				arr2.push(parseInt(d.weight));
+				arr3.push(parseInt(d.avg));
+				//arr4.push(+d.temp);
+			})
+			refresh(arr3,bin);
+		});
+
+		function report(v) {
+
+		switch(v) {
+			case "Height":
+				refresh(arr1,bin)
+				break;
+			case "Weight":
+		  		refresh(arr2,bin);
+		  		break;
+			case "Avg":
+		  		refresh(arr3,bin);
+		  		break;
+					}
+		}
+
+		function changeColumn(){
+			if(col%3==0) refresh(arr1,bin);
+			if(col%3==1) refresh(arr2,bin);
+			if(col%3==2) refresh(arr3,bin);
+			col= col%3+1;								
+		}
+		var fig=0; //0-histogram, 1-bar
+		function refresh(arr,bin)
+		{
+			
+			var binSize= ((d3.max(arr)- d3.min(arr))/bin);
+			var dataset=[];
+			for(var i=0;i<bin+1;i++)
+					dataset.push(0);
+			arr.forEach(function (d){
+				
+				var index = Math.floor((d-d3.min(arr))/binSize);
+				
+					dataset[index]++;
+			});
+					
+			if(fig==0){
+				document.getElementById("chart").innerHTML='';
+				createHistogram(dataset,bin);
+			}
+			else{
+				document.getElementById("chart").innerHTML='';
+				createPiechart(dataset,bin);
+			}
+
+
+		}
+		
+		adjustBin();
+	</script>
+		
+ 		</div>
+ 	<div id="forcedirected" ></div>		
+	</body>
+</html>
